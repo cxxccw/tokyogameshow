@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class main_kettei_effect : MonoBehaviour
+{
+    public GameObject main_kettei_tenntou1;
+    public GameObject main_kettei_tenntou2;
+    public GameObject main_kettei_chara1;
+    public float tenntou1_A = 0;
+    public float tenntou2_A = 0;
+    public float chara1_A = 0;
+    public float tenntou1_Aspeed = 0;
+    public float tenntou2_Aspeed = 0;
+    public float chara1_Aspeed = 0;
+    public bool KetteiON;
+    public bool X;
+    // Use this for initialization
+
+    void Start()
+    {
+        main_kettei_tenntou1.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, tenntou1_A / 255);
+        main_kettei_tenntou2.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, tenntou2_A / 255);
+        main_kettei_chara1.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, chara1_A / 255);
+
+    }
+
+
+    // Update is called once per frame
+
+    void Update()
+    {
+        Kettei();
+    }
+
+    void WindMoveStart()
+    {
+        KetteiON = true;
+        Debug.Log("決定START");
+    }
+
+    void Kettei()
+
+    {
+        if (KetteiON)
+        {
+            main_kettei_tenntou1.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, tenntou1_A / 255);
+            Debug.Log(main_kettei_tenntou1.GetComponent<SpriteRenderer>().color);
+            main_kettei_tenntou2.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, tenntou2_A / 255);
+            Debug.Log(main_kettei_tenntou2.GetComponent<SpriteRenderer>().color);
+            main_kettei_chara1.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 255f / 255f, 255f / 255f, chara1_A / 255);
+            Debug.Log(main_kettei_chara1.GetComponent<SpriteRenderer>().color);
+
+            tenntou1_A += tenntou1_Aspeed;
+
+            if (tenntou1_A >= 255)
+            {
+                tenntou2_A += tenntou2_Aspeed;
+
+            }
+
+
+            if (tenntou2_A >= 255)
+            {
+                chara1_A += chara1_Aspeed;
+            }
+
+            if (chara1_A >= 255)
+            {
+                GameObject.Find("kettei").GetComponent<main_kettei_effect>().enabled = false;
+            }
+        }
+    }
+}
